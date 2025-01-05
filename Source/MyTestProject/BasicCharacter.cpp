@@ -32,3 +32,23 @@ void ABasicCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 }
 
+void ABasicCharacter::Attack_Melee()
+{
+	if (isDuringAttack) return;
+
+	ComboAttack_Num = rand() % 3 + 1;
+	FString PlaySection = "Attack0" + FString::FromInt(ComboAttack_Num);
+	PlayAnimMontage(AttackCombo_AnimMt, 1.f, FName(*PlaySection));
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Attack!"));
+	isDuringAttack = true;
+
+	FTimerHandle TH_Attack_End;
+	GetWorldTimerManager().SetTimer(TH_Attack_End, this, &ABasicCharacter::Attack_Melee_End, 1.0f, false);
+}
+
+void ABasicCharacter::Attack_Melee_End()
+{
+	isDuringAttack = false;
+}
+
