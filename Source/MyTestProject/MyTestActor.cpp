@@ -9,6 +9,7 @@
 #include "MyTestCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "particles/ParticleSystemComponent.h"
+#include "Components/Image.h"
 
 // Sets default values
 AMyTestActor::AMyTestActor()
